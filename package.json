@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "This is the description of the plugin.",
   "strapi": {
-    "name": "String Array",
+    "name": "string-array",
     "description": "Adds support for arrays of string as field types",
     "kind": "plugin"
   },
