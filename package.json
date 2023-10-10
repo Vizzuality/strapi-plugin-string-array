@@ -1,6 +1,6 @@
 {
   "name": "string-array",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Adds support for arrays of string as field types.",
   "license": "SEE LICENSE IN LICENSE",
   "strapi": {
@@ -38,7 +38,9 @@
   },
   "maintainers": [
     {
-      "name": "Vizzuality"
+      "name": "Vizzuality",
+      "email": "hello@vizzuality.com",
+      "url": "https://vizzuality.com"
     }
   ],
   "engines": {
