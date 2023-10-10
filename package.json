@@ -1,5 +1,5 @@
 {
-  "name": "string-array",
+  "name": "strapi-plugin-string-array",
   "version": "1.0.0",
   "description": "Adds support for arrays of string as field types.",
   "license": "SEE LICENSE IN LICENSE",
