@@ -7,6 +7,7 @@ const Input = ({
   error,
   name,
   onChange,
+  intlLabel,
   value
 }) => {
   const { formatMessage } = useIntl();
@@ -19,11 +20,18 @@ const Input = ({
     onChange({ target: { name, value: newValue, type: attribute.type } });
   }
 
+    const label = intlLabel.id
+        ? formatMessage(
+            { id: intlLabel.id, defaultMessage: intlLabel.defaultMessage },
+            { ...intlLabel.values }
+        )
+        : name;
+
   return (
     <>
       <Textarea
         placeholder="Individual strings divided by commas"
-        label={name}
+        label={label}
         name={name}
         onChange={(e) => handleValueChange(e.target.value)}
       >
