@@ -1,46 +1,48 @@
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useIntl } from 'react-intl';
 import { Textarea, Typography } from '@strapi/design-system';
 
 const Input = ({
-  attribute,
-  error,
-  name,
-  onChange,
-  intlLabel,
-  value
-}) => {
+                 attribute,
+                 error,
+                 name,
+                 onChange,
+                 intlLabel,
+                 value
+               }) => {
   const { formatMessage } = useIntl();
-  const [arrayOfStrings, setArrayOfStrings] = useState(() => {
-    return Array.isArray(value) ? value.join(',') : value;
-  });
+  const separatorName = attribute?.options?.separator || 'comma';
 
-  const handleValueChange = (newValue) => {
-    setArrayOfStrings(newValue);
-    onChange({ target: { name, value: newValue, type: attribute.type } });
-  }
+  const handleChange = (e) => {
+    onChange({
+      target: { name, type: attribute.type, value: e.currentTarget.value },
+    });
+  };
 
-    const label = intlLabel.id
-        ? formatMessage(
-            { id: intlLabel.id, defaultMessage: intlLabel.defaultMessage },
-            { ...intlLabel.values }
-        )
-        : name;
+  const label = intlLabel.id
+    ? formatMessage(
+      { id: intlLabel.id, defaultMessage: intlLabel.defaultMessage },
+      { ...intlLabel.values }
+    )
+    : name;
+
+
+  const placeholder = `Individual strings divided by ${separatorName}s`
 
   return (
     <>
       <Textarea
-        placeholder="Individual strings divided by commas"
+        placeholder={placeholder}
         label={label}
         name={name}
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={handleChange}
       >
-        {arrayOfStrings}
-      </Textarea>
+        {value}
+      </Textarea >
       {error &&
-        <Typography variant="pi" textColor="danger600">
+        <Typography variant="pi" textColor="danger600" >
           {formatMessage({ id: error, defaultMessage: error })}
-        </Typography>
+        </Typography >
       }
     </>
   )

@@ -1,23 +1,15 @@
 'use strict';
 
 const decorator = (service) => ({
-  async create(uid, opts = {}) {
+  async findMany(uid, params = {}) {
     const model = strapi.getModel(uid);
-    const { extractArrayFields, updateArrayFields } = await strapi.plugin('string-array').service('db-manager-services');
+    const result = await service.findMany.call(this, uid, params);
 
-    let updateFields = extractArrayFields(opts.data, model);
-    const entry = await service.create.call(this, uid, opts);
-    await updateArrayFields(updateFields, model, { id: entry.id });
-    return entry;
-  },
+    const { stringToArray } = await strapi.plugin('string-array').service('db-manager-services');
 
-  async update(uid, entityId, opts = {}) {
-    const model = strapi.getModel(uid);
-    const { extractArrayFields, updateArrayFields } = await strapi.plugin('string-array').service('db-manager-services');
+    await stringToArray(model, result);
 
-    let updateFields = extractArrayFields(opts.data, model);
-    await updateArrayFields(updateFields, model, { id: entityId });
-    return await service.update.call(this, uid, entityId, opts);
+    return result;
   }
 });
 
