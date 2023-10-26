@@ -9,6 +9,19 @@ const separatorMap = {
 }
 
 module.exports = ({ strapi }) => {
+  const arrayToString = function(data, model) {
+    let updateFields = []
+    Object.keys(model.attributes).forEach(attr => {
+      if (model.attributes[attr].customField === 'plugin::string-array.input') {
+        if (data[attr] instanceof Array) {
+          const separator = separatorMap[model.attributes[attr].options?.separator || 'comma']
+          data[attr] = data[attr].join(separator)
+        }
+      }
+    });
+    return data
+  }
+
   const stringToArray = async function (model, results) {
     let convertFields = []
     Object.keys(model.attributes).forEach(attr => {
@@ -31,6 +44,7 @@ module.exports = ({ strapi }) => {
   }
 
   return {
+    arrayToString,
     stringToArray
   }
 };
