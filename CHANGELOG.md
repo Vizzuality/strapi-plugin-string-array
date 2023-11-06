@@ -1,3 +1,7 @@
+# 1.1.2
+
+- Add `@strapi/strapi` as peer dependency.
+
 # 1.1.1
 
 - Fix issue when importing data using Import Export plugin.
