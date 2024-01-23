@@ -5,9 +5,20 @@ const decorator = (service) => ({
     const model = strapi.getModel(uid);
     const result = await service.findMany.call(this, uid, params);
 
-    const { stringToArray } = await strapi.plugin('string-array').service('db-manager-services');
+    const { stringToArrayInResultArray } = await strapi.plugin('string-array').service('db-manager-services');
 
-    await stringToArray(model, result);
+    await stringToArrayInResultArray(model, result);
+
+    return result;
+  },
+
+  async findOne(uid, id, parameters) {
+    const model = strapi.getModel(uid);
+    const result = await service.findOne.call(this, uid, id, parameters);
+
+    const { stringToArrayInSingleResult } = await strapi.plugin('string-array').service('db-manager-services');
+
+    await stringToArrayInSingleResult(model, result);
 
     return result;
   },

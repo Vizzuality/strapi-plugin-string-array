@@ -1,3 +1,7 @@
+# 1.1.3
+
+- Fix issue where loading content by id (`findOne`) would display data as string instead of array.
+
 # 1.1.2
 
 - Add `@strapi/strapi` as peer dependency.

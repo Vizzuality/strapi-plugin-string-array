@@ -22,7 +22,11 @@ module.exports = ({ strapi }) => {
     return data
   }
 
-  const stringToArray = async function (model, results) {
+  const stringToArrayInSingleResult = async function (model, result) {
+    return (await stringToArrayInResultArray(model, [result]))[0]
+  }
+
+  const stringToArrayInResultArray = async function (model, results) {
     let convertFields = []
     Object.keys(model.attributes).forEach(attr => {
       if (model.attributes[attr].customField === 'plugin::string-array.input') {
@@ -45,6 +49,7 @@ module.exports = ({ strapi }) => {
 
   return {
     arrayToString,
-    stringToArray
+    stringToArrayInResultArray,
+    stringToArrayInSingleResult
   }
 };
