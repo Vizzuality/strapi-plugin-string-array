@@ -1,3 +1,7 @@
+# 1.2.1
+
+- Fix issue when converting non-string values.
+
 # 1.2.0
 
 - Replace `findOne`/`findMany` decoration with routing middleware.

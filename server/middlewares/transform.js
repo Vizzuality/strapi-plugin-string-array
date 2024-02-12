@@ -12,7 +12,7 @@ const transformGetSingle = async (fieldMap, strapi, ctx, next) => {
   }
 
   for (const [key, value] of Object.entries(fieldMap)) {
-    if (ctx.response.body.data.attributes[key]) {
+    if (ctx.response.body.data.attributes[key] &&  typeof ctx.response.body.data.attributes[key]=== 'string') {
       ctx.response.body.data.attributes[key] = ctx.response.body.data.attributes[key].split(separatorMap[value.options.separator || 'comma']);
     }
   }
@@ -28,7 +28,7 @@ const transformGetArray = async (fieldMap, strapi, ctx, next) => {
 
   for (const [key, value] of Object.entries(fieldMap)) {
     ctx.response.body.data = ctx.response.body.data.map((item) => {
-      if (key in item.attributes) {
+      if (key in item.attributes && typeof item.attributes[key] === 'string') {
         item.attributes[key] = item.attributes[key].split(separatorMap[value.options.separator || 'comma']);
       }
       return item;
