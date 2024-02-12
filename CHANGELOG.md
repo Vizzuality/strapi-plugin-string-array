@@ -1,3 +1,8 @@
+# 1.2.0
+
+- Replace `findOne`/`findMany` decoration with routing middleware.
+- Add usage instructions to README.
+
 # 1.1.3
 
 - Fix issue where loading content by id (`findOne`) would display data as string instead of array.
