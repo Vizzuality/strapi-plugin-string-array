@@ -8,6 +8,7 @@ module.exports = ({ strapi }) => {
   _.forEach(Object.keys(strapi.api), (apiName) => {
     _.forEach(strapi.api[apiName].contentTypes, (contentType) => {
       const fieldMap = {};
+      const contentTypeKind = contentType.kind;
       for (const [key, value] of Object.entries(contentType.attributes)) {
         if (value.customField === 'plugin::string-array.input') {
           fieldMap[key] = value;
@@ -20,7 +21,7 @@ module.exports = ({ strapi }) => {
             _.set(route, ['config', 'middlewares'], []);
           }
 
-          if (route.path.endsWith('/:id')) {
+          if (route.path.endsWith('/:id') || contentTypeKind === 'singleType') {
             route.config.middlewares.push((ctx, next) => transformGetSingle(fieldMap, strapi, ctx, next));
           } else {
             route.config.middlewares.push((ctx, next) => transformGetArray(fieldMap, strapi, ctx, next));

@@ -1,3 +1,7 @@
+# 1.2.2
+
+- Fix issue when handling single content types.
+
 # 1.2.1
 
 - Fix issue when converting non-string values.
