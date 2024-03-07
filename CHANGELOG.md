@@ -1,3 +1,7 @@
+# 1.2.3
+
+- Fix issue where strapi bootstrapping would fail when using the plugin.
+
 # 1.2.2
 
 - Fix issue when handling single content types.

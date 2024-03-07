@@ -16,6 +16,9 @@ module.exports = ({ strapi }) => {
       }
 
       if (Object.keys(fieldMap).length > 0) {
+        if (!_.has(strapi.api[apiName], ['routes', apiName, 'routes']) || _.isEmpty(strapi.api[apiName].routes[apiName].routes)) {
+          return;
+        }
         strapi.api[apiName].routes[apiName].routes.filter(route => route.method === 'GET').forEach(route => {
           if (!_.has(route, ['config', 'middlewares'])) {
             _.set(route, ['config', 'middlewares'], []);
